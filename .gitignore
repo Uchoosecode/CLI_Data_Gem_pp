@@ -8,5 +8,6 @@
 /tmp/
 
 # rspec failure tracking
+.env
 .rspec_status
 NOTEPAD.md
