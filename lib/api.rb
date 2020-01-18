@@ -2,24 +2,22 @@ require_relative "./environment.rb"
 
 class API 
 
-
-    
     BASE_URL = "http://strainapi.evanbusse.com/#{ENV['TOKEN']}"
     STRANDS_URL = "#{BASE_URL}/strains/search/all" #returns the info for 1970 different strands of cannabis
     FLAVORS_URL = "#{BASE_URL}/searchdata/flavors" #returns all the different flavors for each strand
     EFFECTS_URL = "#{BASE_URL}/searchdata/effects" #returns all the effects for each strand
     
-    def get_strands
+    def self.get_strands
             strands = RestClient.get("#{STRANDS_URL}") #opens the strands url
             strands_hash = JSON.parse(strands) #parses the info into a hash
         end
         
-        def get_flavors
+        def self.get_flavors
             flavors = RestClient.get("#{FLAVORS_URL}") #return info of all the flavors
             flavors_array = JSON.parse(flavors) #parses an array of the flavors
         end
         
-        def get_effects
+        def self.get_effects
             effects = RestClient.get("#{EFFECTS_URL}")
             effects_array = JSON.parse(effects)
         end

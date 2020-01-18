@@ -1,3 +1,4 @@
+.env
 /.bundle/
 /.yardoc
 /_yardoc/
@@ -8,6 +9,5 @@
 /tmp/
 
 # rspec failure tracking
-.env
 .rspec_status
 NOTEPAD.md

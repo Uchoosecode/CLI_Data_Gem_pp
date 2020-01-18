@@ -27,7 +27,7 @@ class CLI
         
         if user_input == '1'
             puts "Here are the strands by name..."
-            Strand.new.list_strands
+            STRAND.new.list_strands_name
             s_name_sub_menu_options
 
         elsif user_input == '2'
