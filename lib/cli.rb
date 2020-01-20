@@ -3,13 +3,12 @@ require_relative "./environment.rb"
 
 class CLI 
 
-    attr_reader :strands_info, :strand_name
+    # attr_reader :strands_info, :strand_name
     
     @@input = []
 
     def initialize
         start
-        # @strands_info = STRAND.all
     end
     
     def start
@@ -90,9 +89,7 @@ class CLI
             puts "Here are the flavors for this Strand..."
             puts list_strands_info["#{save_input}".to_i]["flavors"]
             ss_flavor_options 
-# binding.pry
-                
-                
+# binding.pry              
             elsif user_input == '2'
                 puts "Here are the effects of this Strand..."
                 puts list_strands_info["#{save_input}".to_i]["effects"]
@@ -113,69 +110,34 @@ class CLI
             else
                 puts "Not an option pick again please...."
                 s_name_sub_menu_options
-            end
         end
-        
-        def ss_flavor_options
-            puts "Type '1' to list Strands by names..."
-            puts "Type '2' to list the effects of this Strand..."
-            puts "Type '3' to race of this Strand..."
-            puts "Type '0' to exit"
-            ss_menu_user_input
-        end
+    end
+    
+    def ss_flavor_options
+        puts "Type '1' to list Strands by names..."
+        puts "Type '2' to list the effects of this Strand..."
+        puts "Type '3' to race of this Strand..."
+        puts "Type '0' to exit"
+        ss_flavor_user_input
+    end
 
-        def ss_effects_options
-            puts "Type '1' to list Strands by names..."
-            puts "Type '2' to list flavors of this Strand..."
-            puts "Type '3' to list race of this Strand..."
-            puts "Type '0' to exit"
-            ss_menu_user_input
-        end
+    def ss_effects_options
+        puts "Type '1' to list Strands by names..."
+        puts "Type '2' to list flavors of this Strand..."
+        puts "Type '3' to list race of this Strand..."
+        puts "Type '0' to exit"
+        ss_effects_user_input
+    end
 
-        def ss_race_options
-            puts "Type '1' to list Strands by names..."
-            puts "Type '2' to list flavors of this Strand..."
-            puts "Type '3' to list effects of this Strand..."
-            puts "Type '0' to exit"
-            ss_menu_user_input
-        end
-        def s_effects_sub_menu_options
-            puts "Type the number for the effects you'd like to experience"
-            s_effects_sub_user_input
-        end
+    def ss_race_options
+        puts "Type '1' to list Strands by names..."
+        puts "Type '2' to list flavors of this Strand..."
+        puts "Type '3' to list effects of this Strand..."
+        puts "Type '0' to exit"
+        ss_race_user_input
+    end
        
-            
-            def s_flavors_sub_user_input
-                user_input = gets.strip
-                
-                if user_input.to_i.between?(1, flavors_list.length)
-                    puts "strand info array"
-                    strands_by_flavor
-                    
-                    ss_menu_options 
-                    
-        else
-            puts "Not an option pick again please...."
-            s_name_sub_menu_options
-        end
-    end
-
-    def s_effects_sub_user_input
-        user_input = gets.strip
-        
-        if user_input == "#{i}"
-            puts "strand info array"
-            ss_menu_options 
-        
-        else
-            puts "Not an option pick again please...."
-            s_name_sub_menu_options
-        end
-    end
-
-
-
-    def ss_menu_user_input
+    def ss_flavor_user_input
         user_input = gets.strip
         
         if user_input == '1'
@@ -184,13 +146,14 @@ class CLI
             s_name_sub_menu_options
 
         elsif user_input == '2'
-            puts "Strands by flavors"
-                flavors_list
-                s_flavors_sub_menu_options
+            puts "Here are the effects of this Strand..."
+            puts list_strands_info["#{save_input}".to_i]["effects"]
+            ss_effects_options
 
         elsif user_input == '3'
-            puts "Strands by effect"
-                s_effects_sub_menu_options
+            puts "This is the race of this Strand..."
+            puts list_strands_info["#{save_input}".to_i]["race"]
+            ss_race_options
 
         elsif user_input == '0'
             puts "Thank You for stopping by!!!"
@@ -203,10 +166,65 @@ class CLI
 
     end
     
+    def ss_effects_user_input
+        user_input = gets.strip
+        
+        if user_input == '1'
+            list_all_strands_name
+            puts "Here are the strands by name..."
+            s_name_sub_menu_options
+
+        elsif user_input == '2'
+            puts "Here are the flavors for this Strand..."
+            puts list_strands_info["#{save_input}".to_i]["flavors"]
+            ss_flavor_options 
+
+        elsif user_input == '3'
+            puts "Here are the effects of this Strand..."
+                puts list_strands_info["#{save_input}".to_i]["effects"]
+                ss_effects_options
+            
+        elsif user_input == '0'
+            puts "Thank You for stopping by!!!"
+            goodbye
+
+        else 
+            puts "Not an option pick again please...."
+            main_menu_options
+        end
+
+    end
+
+    def ss_race_user_input
+        user_input = gets.strip
+        
+        if user_input == '1'
+            list_all_strands_name
+            puts "Here are the strands by name..."
+            s_name_sub_menu_options
+
+        elsif user_input == '2'
+            puts "Here are the flavors for this Strand..."
+            puts list_strands_info["#{save_input}".to_i]["flavors"]
+            ss_flavor_options 
+
+        elsif user_input == '3'
+            puts "This is the race of this Strand..."
+            puts list_strands_info["#{save_input}".to_i]["race"]
+            ss_race_options
+            
+        elsif user_input == '0'
+            puts "Thank You for stopping by!!!"
+            goodbye
+
+        else 
+            puts "Not an option pick again please...."
+            main_menu_options
+        end
+
+    end
+
     def goodbye
         exit
     end
-
-
 end
-# puts "Grabbing you some strands, please hold..."
