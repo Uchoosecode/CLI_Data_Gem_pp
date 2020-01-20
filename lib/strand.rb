@@ -1,27 +1,20 @@
 require_relative "./environment.rb"
-# require 'rest-client'
 require 'pry'
 
 class STRAND
 
-    attr_accessor 
-    attr_reader 
-
     @@all = []
-
     
     def initialize
-        strands_hash = API.get_strands #shrink my hash to an array of 35 different strands
+        strands_hash = API.get_strands #creates a variable of Strands in a hash 
         
-        strands_hash.each do |std, info| 
+        strands_hash.each do |std, info| #iterates through each hash
             @@all << ["#{std}=", info]
-            # binding.pry
         end 
     end
     
-    def self.all
+    def self.all #method to call all Strands
         @@all
     end
-
 end
 STRAND.new

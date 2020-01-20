@@ -1,6 +1,6 @@
 # CLIDataGemPp
 
-Welcome to my Cannabis API. This API lets you find the strand you're interested in by name, by the flavors or by the effects of a strand.
+Welcome to my Cannabis Gem. This Gem lets you find the Strand you're interested in by name, list the flavors of the Strand, list the race or the Strand or list the effects of the Strand.  I used an API and accessed he information using the "rest-client" gemfile and  used the "json" gemfile to parse the information into a hash.  Have fun!
 ## Installation
 
 Add this line to your application's Gemfile:
