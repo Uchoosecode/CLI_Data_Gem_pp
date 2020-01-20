@@ -51,7 +51,7 @@ class CLI
     
     def main_menu_input
         user_input = gets.strip
-        save_input << user_input
+        save_input << user_input.to_i
         if user_input.to_i.between?(1, STRAND.all.length)
             puts " "
             puts strand_name_call[user_input.to_i-1]
@@ -87,22 +87,23 @@ class CLI
         
         if user_input == '1'
             puts "Here are the flavors for this Strand..."
-            puts list_strands_info["#{save_input}".to_i]["flavors"]
+            puts list_strands_info[save_input.at(0)]["flavors"]
+            binding.pry              
             ss_flavor_options 
-# binding.pry              
-            elsif user_input == '2'
-                puts "Here are the effects of this Strand..."
-                puts list_strands_info["#{save_input}".to_i]["effects"]
+            
+        elsif user_input == '2'
+            puts "Here are the effects of this Strand..."
+            puts list_strands_info[save_input.at(0)]["effects"].flatten
                 ss_effects_options
 
             elsif user_input == '3'
                 puts "This is the race of this Strand..."
-                puts list_strands_info["#{save_input}".to_i]["race"]
+                puts list_strands_info[save_input.at(0)]["race"]
                 ss_race_options
 
             elsif user_input == '4'
                 list_all_strands_name
-                s_name_sub_menu_options
+                main_menu_input
 
             elsif user_input == '0'
                 goodbye
@@ -143,16 +144,16 @@ class CLI
         if user_input == '1'
             list_all_strands_name
             puts "Here are the strands by name..."
-            s_name_sub_menu_options
+            main_menu_options
 
         elsif user_input == '2'
             puts "Here are the effects of this Strand..."
-            puts list_strands_info["#{save_input}".to_i]["effects"]
+            puts list_strands_info[save_input.at(0)]["effects"].flatten
             ss_effects_options
 
         elsif user_input == '3'
             puts "This is the race of this Strand..."
-            puts list_strands_info["#{save_input}".to_i]["race"]
+            puts list_strands_info[save_input.at(0)]["race"]
             ss_race_options
 
         elsif user_input == '0'
@@ -172,16 +173,16 @@ class CLI
         if user_input == '1'
             list_all_strands_name
             puts "Here are the strands by name..."
-            s_name_sub_menu_options
+            main_menu_options
 
         elsif user_input == '2'
             puts "Here are the flavors for this Strand..."
-            puts list_strands_info["#{save_input}".to_i]["flavors"]
+            puts list_strands_info[save_input.at(0)]["flavors"]
             ss_flavor_options 
 
         elsif user_input == '3'
             puts "Here are the effects of this Strand..."
-                puts list_strands_info["#{save_input}".to_i]["effects"]
+                puts list_strands_info[save_input.at(0)]["effects"]
                 ss_effects_options
             
         elsif user_input == '0'
@@ -201,16 +202,16 @@ class CLI
         if user_input == '1'
             list_all_strands_name
             puts "Here are the strands by name..."
-            s_name_sub_menu_options
+            main_menu_options
 
         elsif user_input == '2'
             puts "Here are the flavors for this Strand..."
-            puts list_strands_info["#{save_input}".to_i]["flavors"]
+            puts list_strands_info[save_input.at(0)]["flavors"]
             ss_flavor_options 
 
         elsif user_input == '3'
             puts "This is the race of this Strand..."
-            puts list_strands_info["#{save_input}".to_i]["race"]
+            puts list_strands_info[save_input.at(0)]["race"]
             ss_race_options
             
         elsif user_input == '0'
@@ -228,3 +229,7 @@ class CLI
         exit
     end
 end
+# Here are the effects of this Strand...
+# {"positive"=>["Relaxed", "Hungry", "Happy", "Sleepy"]
+#     , "negative"=>["Dizzy"], "medical"=>["Depression", 
+#         "Insomnia", "Pain", "Stress", "Lack of Appetite"]}
