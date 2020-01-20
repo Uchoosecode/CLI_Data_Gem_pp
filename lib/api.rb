@@ -9,12 +9,12 @@ class API
     
     def self.get_strands
             strands = RestClient.get("#{STRANDS_URL}") #opens the strands url
-            strands_hash = JSON.parse(strands) #parses the info into a hash
+            strands_hash = JSON.parse(strands.body) #parses the info into a hash
         end
         
         def self.get_flavors
             flavors = RestClient.get("#{FLAVORS_URL}") #return info of all the flavors
-            flavors_array = JSON.parse(flavors) #parses an array of the flavors
+            flavors_array = JSON.parse(flavors.body) #parses an array of the flavors
         end
         
         def self.get_effects
@@ -23,7 +23,7 @@ class API
         end
     
 end
-# API.new.get_strands
+API.get_strands
 
 # Server-side applications must pass two parameters in addition to the apikey parameter:
 

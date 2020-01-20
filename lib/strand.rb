@@ -4,33 +4,24 @@ require 'pry'
 
 class STRAND
 
-    attr_accessor :name, :flavors, :effects
+    attr_accessor 
+    attr_reader 
 
-    @@strands_name_array = []
-    @@flavors_array = []
-    @@effects_array = []
+    @@all = []
+
     
     def initialize
-        strands_hash = API.get_strands
+        strands_hash = API.get_strands #shrink my hash to an array of 35 different strands
         
+        strands_hash.each do |std, info| 
+            @@all << ["#{std}=", info]
+            # binding.pry
+        end 
     end
-    
-    def list_strands_name
-        strands_array = API.get_strands.to_a[100..134] #shrink my hash to an array of 35 different strands
-        strand_name = []
-        strands_array.each.with_index(1) do |std, i| 
-            strand_name << "#{i}. #{std[0]}"
-        end
-        puts strand_name
-        # binding.pry
-    end
-        
     
     def self.all
-        @@strands_name_array << self
+        @@all
     end
-
-
 
 end
 STRAND.new
