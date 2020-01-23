@@ -1,4 +1,4 @@
-require_relative "./environment.rb"
+# require_relative "./environment.rb"
 
 class CLI 
 
@@ -7,8 +7,9 @@ class CLI
     def initialize
         start
     end
-    
+    # method
     def start
+        self # what is self?? it's the instance of CLI
         puts "Welcome to The Cannabis Api"
         puts "Grabbing your list of Strands"
         puts "Please hold..."
@@ -17,21 +18,21 @@ class CLI
     end
     
     def list_all_strands_name #method that creates the initial Strand list
-        STRAND.all.each.with_index(1) do |name, i|
+        Strand.all.each.with_index(1) do |name, i|
             puts "#{i}. #{name[0].chop}"
         end
     end
     
     def strand_name_call #method that calls the strand from the user's input
             strand_name = []
-        STRAND.all.each do |name| 
+        Strand.all.each do |name| 
             strand_name << name[0].chop
         end
         strand_name
     end
     
     def list_strands_info #method that is used to access the information of each Strand
-        strands_info_hash = STRAND.all.to_h
+        strands_info_hash = Strand.all.to_h
         info_array = []
         strands_info_hash.each_value do |info|
             info_array << info
@@ -49,7 +50,7 @@ class CLI
         user_input = gets.strip
         save_input << user_input.to_i #pushes the user's input into the class array
         
-        if user_input.to_i.between?(1, STRAND.all.length) #only accepts the user's input between this range
+        if user_input.to_i.between?(1, Strand.all.length) #only accepts the user's input between this range
             puts strand_name_call[user_input.to_i-1]
             s_name_sub_menu_options
                         
