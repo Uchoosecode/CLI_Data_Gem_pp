@@ -1,20 +1,25 @@
-require_relative "./environment.rb"
-require 'pry'
-
-class STRAND
+class Strand
 
     @@all = []
     
-    def initialize
-        strands_hash = API.get_strands #creates a variable of Strands in a hash 
+    attr_accessor :name, :race, :flavors, :effects
+    
+    def initialize(strand_attr)
         
-        strands_hash.each do |std, info| #iterates through each hash
-            @@all << ["#{std}=", info]
-        end 
+        strand_attr.each do |std, info|
+            self.send("#{std}=", info) if self.respond_to?("#{std}=")
+            # binding.pry
+        end
+        self.save 
+        @@all
+    end
+    
+    
+    def save
+        @@all << self
     end
     
     def self.all #method to call all Strands
         @@all
     end
 end
-STRAND.new
