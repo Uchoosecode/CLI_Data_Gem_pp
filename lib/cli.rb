@@ -1,15 +1,17 @@
+require 'pry'
 class CLI 
 
     @@input = [] #create a class array thats saves the user's input
 
     def initialize
+        puts "Welcome to The Cannabis Api"
+        puts "Grabbing your list of Strands"
+        puts "Please hold..."
+        API.get_strands
         start
     end
     
     def start
-        puts "Welcome to The Cannabis Api"
-        puts "Grabbing your list of Strands"
-        puts "Please hold..."
         list_all_strands_name #listing all the Strands as soon as the Gem starts
         main_menu_options #options to choose the Strand or exit
     end
@@ -21,11 +23,8 @@ class CLI
     end
     
     def list_strands_info #method that is used to access the information of each Strand
-        info_array = []
-        Strand.all.each do |info|
-            info_array << info
-        end
-        info_array #returns an array of all a hash with the keys being the different options
+    
+        Strand.all #returns an array of all a hash with the keys being the different options
     end
 
     def main_menu_options
@@ -36,7 +35,7 @@ class CLI
     
     def main_menu_input
         user_input = gets.strip
-        save_input << user_input.to_i #pushes the user's input into the class array
+        @@input = user_input.to_i #pushes the user's input into the class array
         
         if user_input.to_i.between?(1, Strand.all.length) #only accepts the user's input between this range
             puts "Strand Name"
@@ -84,28 +83,30 @@ class CLI
     def s_name_sub_user_input #input for the s_name_sub_menu_options
         user_input = gets.strip
         
-        if user_input == '1'
+        case user_input
+        
+        when '1'
             puts "Strand Flavors"
             puts "  "
-            puts list_strands_info[save_input.at(0)].flavors #the .at method give us access to the value of the class array      
+            puts list_strands_info[save_input].flavors #the .at method give us access to the value of the class array      
             puts "  "
             ss_flavor_options
             
-        elsif user_input == '2'
+        when '2'
             effects_options #special options for the effects
             
-        elsif user_input == '3'
+        when '3'
             puts "Strand Race"
             puts "  "
-            puts list_strands_info[save_input.at(0)].race
+            puts list_strands_info[save_input].race
             puts "  "
             ss_race_options
             
-        elsif user_input == '4'
+        when '4'
             puts list_all_strands_name 
             main_menu_input
             
-        elsif user_input == '0'
+        when '0'
             goodbye
             
         else
@@ -117,53 +118,55 @@ class CLI
     def effects_options_input #input for the effects_options
         user_input = gets.strip
 
-            if user_input == '1'
+            case user_input
+
+            when '1'
                 puts "Positive Effects"
                 puts "  "
-                puts list_strands_info[save_input.at(0)].effects["positive"]
+                puts list_strands_info[save_input].effects["positive"]
                 puts "  "
                 effects_options
 
-            elsif user_input == '2'
+            when '2'
                 puts "Negative Effects"
                 puts "  "
-                puts list_strands_info[save_input.at(0)].effects["negative"]
+                puts list_strands_info[save_input].effects["negative"]
                 puts "  "
                 effects_options
 
-            elsif user_input == '3'
+            when '3'
                 puts "Medical Effects"
                 puts "  "
-                puts list_strands_info[save_input.at(0)].effects["medical"]
+                puts list_strands_info[save_input].effects["medical"]
                 puts "  "
                 effects_options
 
-            elsif user_input == '4'
+            when '4'
                 puts "Strand Name"
                 puts "  "
-                puts list_strands_info[save_input.at(0)].name
+                puts list_strands_info[save_input].name
                 puts "  "
                 s_name_sub_menu_options
 
-            elsif user_input == '5'
+            when '5'
                 puts "Strand Flavors"
                 puts "  "
-                puts list_strands_info[save_input.at(0)].flavors
+                puts list_strands_info[save_input].flavors
                 puts "  "
                 ss_flavor_options
 
-            elsif user_input == '6'
+            when '6'
                 list_all_strands_name
                 puts "Here are the strands by name..."
                 puts "  "
                 main_menu_options
 
-            elsif user_input == '0'
+            when '0'
                 goodbye
 
             else
                 puts "Not an option pick again please...."
-                main_menu_options
+                effects_options
             end
     end
 
@@ -194,88 +197,94 @@ class CLI
     def ss_flavor_user_input
         user_input = gets.strip
         
-        if user_input == '1'
+        case user_input
+         
+        when '1'
             list_all_strands_name
             puts "Here are the strands by name..."
             main_menu_options
 
-        elsif user_input == '2'
+        when '2'
             effects_options
 
-        elsif user_input == '3'
+        when '3'
             puts "Strand Race"
             puts "  "
-            puts list_strands_info[save_input.at(0)].race
+            puts list_strands_info[save_input].race
             puts "  "
             ss_race_options
 
-        elsif user_input == '0'
+        when '0'
             puts "Thank You for stopping by!!!"
             goodbye
 
         else 
             puts "Not an option pick again please...."
-            main_menu_options
+            ss_flavor_options
         end
     end
     
     def ss_effects_user_input
         user_input = gets.strip
         
-        if user_input == '1'
+        case user_input
+
+        when '1'
             list_all_strands_name
             puts "Here are the strands by name..."
             main_menu_options
 
-        elsif user_input == '2'
+        when '2'
             puts "Strand Flavors"
             puts "  "
-            puts list_strands_info[save_input.at(0)].flavors
+            puts list_strands_info[save_input].flavors
             puts "  "
             ss_flavor_options 
 
-        elsif user_input == '3'
+        when '3'
             puts "Strand Race"
             puts "  "
-            puts list_strands_info[save_input.at(0)].race
+            puts list_strands_info[save_input].race
             puts "  "
             ss_race_options
             
-        elsif user_input == '0'
+        when '0'
             puts "Thank You for stopping by!!!"
             goodbye
 
         else 
             puts "Not an option pick again please...."
-            main_menu_options
+            ss_effects_options
         end
     end
 
     def ss_race_user_input
         user_input = gets.strip
         
-        if user_input == '1'
+        case user_input
+
+        when '1'
             list_all_strands_name
             puts "Here are the strands by name..."
             main_menu_options
 
-        elsif user_input == '2'
+        when '2'
             puts "Strand Flavors"
             puts "  "
-            puts list_strands_info[save_input.at(0)].flavors
+            puts list_strands_info[save_input].flavors
             puts "  "
             ss_flavor_options 
 
-        elsif user_input == '3'
+        when '3'
             effects_options
             
-        elsif user_input == '0'
+        when '0'
             puts "Thank You for stopping by!!!"
             goodbye
 
         else 
             puts "Not an option pick again please...."
-            main_menu_options
+            ss_race_options
         end
     end
 
